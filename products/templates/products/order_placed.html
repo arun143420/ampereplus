@@ -1,0 +1,28 @@
+{%extends 'products/base.html'%}
+{%block body%}
+
+<div class="container" style="margin-top:150px">
+    <div class="row">
+
+        <div class="jumbotron col-sm-12">
+            <h1 align="center" style="font-size:90px;"><span class="glyphicon glyphicon-ok-sign"></span></h1>
+            <h2 align="center">Your Order is placed Successfully</h2>
+            <h3 align="center">Your Order number:&nbsp;<b>{{order_id}}</b></h3>
+            <h4 align="center">You need to pay:&nbsp;<b><span class="fa fa-inr"></span>&nbsp;{{total_price}}</b></h4>
+            <br>     <br>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(window).on('beforeunload', function() {
+  $(window).on('unload', function() {
+    window.location.href = '/food/restaurants';
+  });
+
+  return 'Not an empty string';
+});
+
+
+</script>
+{%endblock%}

@@ -1,0 +1,110 @@
+{%extends 'products/base.html'%}
+
+
+{%block body%}
+
+	<section class="home-about-area section-gap" id="about">
+				<div class="container" >
+						 {%if messages%}
+
+							{%for message in messages%}
+						<div align="center" class="alert alert-danger">
+							<strong>{{message}}</strong>
+						</div>
+							{%endfor%}
+						{%endif%}
+					 {%if form.errors%}
+
+					{%endif%}
+					<div class="row justify-content-center align-items-center">
+						<div class="col-lg-8 col-md-12 home-about-left">
+
+                            <h2 align="center">Order number : {{checkout.order_id}}</h2>
+
+    {%if checkout%}
+<div class="table-responsive">
+ <table class="table">
+   <thead>
+        <tr>
+            <th>S. No.</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Actual Price</th>
+		 	<th>After Discount</th>
+        </tr>
+    </thead>
+  <tbody>
+    {% for item in checkout.cartmanager_set.all%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{item.product.prod_name}}</td>
+            <td>{{item.quantity}}</td>
+             <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.actual_prices}}</td>
+            <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.product_prices}}</td>
+        </tr>
+    {%endfor%}
+  </tbody>
+ </table>
+</div><br>
+                    {% if checkout.status%}
+                            <div align="center">
+
+                         <h3 class="mb-20" align="center">Order is delivered Successfully </h3>
+                             <form action="/manager/{{checkout.id}}/status" method="post"  >
+                                     {%csrf_token%}
+                                    <input type="hidden" name="status" value="false">
+                            <button class="genric-btn danger">Mark Un-Delivered</button>
+                                    </form>
+                                </div>
+
+
+                    {%else%}
+
+                            <div align="center">
+                                <form action="/manager/{{checkout.id}}/status" method="post" style="display:inline;">
+                                    {%csrf_token%}
+                                    <input type="hidden" name="status" value="true">
+                            <button class="genric-btn primary">Delivered</button>
+                                    </form>
+                                <form action="/manager/{{checkout.id}}/status" method="post" style="display:inline;">
+                                     {%csrf_token%}
+                                    <input type="hidden" name="status" value="false">
+                            <button class="genric-btn danger">Un-Delivered</button>
+                                    </form>
+                            </div>
+                    {%endif%}
+
+ {%endif%}
+
+ </div>
+                        <div class="col-lg-4 col-md-12  relative">
+                            <br><br>
+							<blockquote class="generic-blockquote">
+                                     <h3 class="mb-20">Order Details</h3>
+
+                                        <div class="">
+                                            <ul class="unordered-list">
+                                        <li><h4><b>Order no.:&nbsp;</b>{{checkout.order_id}}</h4></li>
+                                        <li><h4><b>Payment Mode:&nbsp;</b>{{checkout.payment}}</h4></li>
+                                        <li><h4><b>Total:&nbsp;<i class="fa fa-inr" aria-hidden="true"></i>&nbsp;</b>{{checkout.total_price}}</h4></li>
+                                            </ul>
+                                        </div><hr>
+
+                                     <h3 class="mb-20">Shipping Address Details</h3>
+                                <div class="">
+                                    <ul class="unordered-list">
+                                        <li><b>Name:&nbsp;</b>{{checkout.user.first_name}}&nbsp;{{checkout.user.last_name}}</li>
+                                        <li><b>Contact:&nbsp;</b>{{checkout.user.profile.phone}}</li>
+                                        <li><b>Address:&nbsp;</b>{{checkout.user.profile.address}}</li>
+                                        <li><b>Area:&nbsp;</b>{{checkout.user.profile.area}}</li>
+                                        <li><b>Zipcode:&nbsp;</b>{{checkout.user.profile.zipcode}}</li>
+                                    </ul>
+                                </div>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+
+{%endblock%}

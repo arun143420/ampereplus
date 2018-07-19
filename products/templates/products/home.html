@@ -1,0 +1,309 @@
+ {%extends 'products/base.html'%}
+
+ {%block body%}
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-center">
+						<div class="banner-content col-lg-12 col-md-12">
+							<h6 class="text-uppercase">Don’t look further, here is the key</h6>
+							<h1>
+								We’re Ampere+
+							</h1>
+							<p class="text-white">
+								 We make communication happen between machines & people. We give our
+									users the ability to study the vitals and performance of the machines wile
+									giving them the ability to control them remotely. We engineer your way to
+									automation & peace of mind.
+
+							</p>
+							<a href="/services_products" class="primary-btn header-btn text-uppercase">Get Started</a>
+						</div>												
+					</div>
+				</div>
+			</section>
+			<!-- End banner Area -->
+
+			<!-- Start cat Area -->
+			<section class="cat-area section-gap" id="feature">
+				<div class="container">
+						<h1 align="center" class="mb-10">Our Offered Products </h1><br>
+					<div class="row">
+				{% for product in products%}
+						<div class="col-lg-4">	
+							<div class="single-cat d-flex flex-column">
+								<a href="/products/{{product.id}}" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><i class="fa fa-product-hunt"></i></span></a>
+								<h4 class="mb-20" style="margin-top: 23px;">{{product.prod_name}}</h4>
+								<p id="desc">
+									 {{product.prod_desc}}
+								</p>
+							</div>															
+						</div>
+
+				{%endfor%}
+
+
+					</div>
+				</div>	
+			</section>
+			<!-- End cat Area -->		
+
+<hr>
+
+
+ 	<!-- Start services Area -->
+			<section class="cat-area section-gap aboutus-cat" id="feature">
+				<div class="container">
+						<div class="col-md-12 pb-30 header-text text-center">
+							<h1 class="mb-10">Our Offered Services </h1>
+							<p>
+								Who are in extremely love with eco friendly system..
+							</p>
+						</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="single-cat d-flex flex-column">
+								<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-cloud-check"></span></span></a>
+								<h4 class="mb-20" style="margin-top: 23px;">Cloud Services</h4>
+								<p>
+									Cloud Based Energy Monitoring IoT system which enable us to collect, organise & analyse billions of data pointers to improve the infrastructure of the future
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="single-cat">
+								<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-home"></span></span></a>
+								<h4 class="mt-40 mb-20">Solar Services</h4>
+								<p>
+						 			Engineer your way to big savings from Solar. Why pay money for electricity when solar is shining on your roof. Like a farmer invest in crops, solar power plant is investment for energy
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+			<!-- End services Area -->
+
+
+			<!-- Start faq Area
+			<section class="faq-area section-gap relative">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-center align-items-center">
+						<div class="col-lg-3 col-md-6">
+							<div class="single-faq">
+								<div class="circle">
+								  <div class="inner"></div>
+								</div>
+								<h5><span class="counter">2</span>K+</h5>
+								<p>
+									Projects Completed
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6">
+							<div class="single-faq">
+								<div class="circle">
+								  <div class="inner"></div>
+								</div>
+								<h5><span class="counter">5.5</span>K</h5>
+								<p>
+									Total Employees
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6">
+							<div class="single-faq">
+								<div class="circle">
+								  <div class="inner"></div>
+								</div>
+								<h5 class="counter">959</h5>
+								<p>
+									Happy Clients
+								</p>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6">
+							<div class="single-faq">
+								<div class="circle">
+								  <div class="inner"></div>
+								</div>
+								<h5 class="counter">367</h5>
+								<p>
+									Tickets Submited
+								</p>
+							</div>
+						</div>																		
+					</div>
+				</div>	
+			</section>
+		 		End faq Area -->
+
+
+		 
+			<!-- Start feedback Area -->
+			<section class="feedback-area section-gap relative" id="feedback">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-12 pb-30 header-text text-center">
+							<h1 class="mb-10 text-white">Enjoy our Client’s Feedback</h1>
+							<p class="text-white">
+								Who are in extremely love with eco friendly system..
+							</p>
+						</div>
+					</div>			
+					<div class="row feedback-contents justify-content-center align-items-center">
+						<div class="col-lg-6 feedback-left relative d-flex justify-content-center align-items-center">
+							<div class="overlay overlay-bg"></div>
+							<a class="play-btn" href="https://www.youtube.com/watch?v=ARA0AxrnHdM"><img class="img-fluid" src="img/play-btn.png" alt=""></a>
+						</div>
+						<div class="col-lg-6 feedback-right">
+							<div class="active-review-carusel">
+								<div class="single-feedback-carusel">
+									<div class="title d-flex flex-row">
+										<h4 class="text-white pb-10">Fannie Rowe</h4>
+										<div class="star">
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star"></span>
+											<span class="fa fa-star"></span>								
+										</div>										
+									</div>
+									<p class="text-white">
+										Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
+									</p>
+								</div>
+								<div class="single-feedback-carusel">
+									<div class="title d-flex flex-row">
+										<h4 class="text-white pb-10">Fannie Rowe</h4>
+										<div class="star">
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star"></span>								
+										</div>										
+									</div>
+									<p class="text-white">
+										Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
+									</p>
+								</div>
+								<div class="single-feedback-carusel">
+									<div class="title d-flex flex-row">
+										<h4 class="text-white pb-10">Fannie Rowe</h4>
+										<div class="star">
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked"></span>
+											<span class="fa fa-star checked	"></span>								
+										</div>										
+									</div>
+									<p class="text-white">
+										Accessories Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker. Here you can find the best computer accessory for your laptop, monitor, printer, scanner, speaker.
+									</p>
+								</div>																
+							</div>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End feedback Area -->
+			
+	
+			<!-- Start blog Area -->
+			<section class="blog-area section-gap" id="blog">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-12 pb-30 header-text">
+							<h1>Latest posts from our Blog</h1>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> labore  et dolore magna aliqua.
+							</p>
+						</div>
+					</div>
+					<div class="row">	
+						<div class="single-blog col-lg-4 col-md-4">
+							<div class="thumb">
+								<img class="f-img img-fluid mx-auto" src="img/b1.jpg" alt="">	
+							</div>
+							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<img class="img-fluid" src="img/user.png" alt="">
+									<a href="#"><span>Mark Wiens</span></a>
+								</div>
+								<div class="meta">
+									13th Dec
+									<span class="lnr lnr-heart"></span> 15
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>							
+							<a href="#">
+								<h4>Portable Fashion for young women</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea.
+							</p>
+						</div>
+						<div class="single-blog col-lg-4 col-md-4">
+							<div class="thumb">
+								<img class="f-img img-fluid mx-auto" src="img/b2.jpg" alt="">	
+							</div>
+							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<img class="img-fluid" src="img/user.png" alt="">
+									<a href="#"><span>Mark Wiens</span></a>
+								</div>
+								<div class="meta">
+									13th Dec
+									<span class="lnr lnr-heart"></span> 15
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>							
+							<a href="#">
+								<h4>Portable Fashion for young women</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea.
+							</p>
+						</div>
+						<div class="single-blog col-lg-4 col-md-4">
+							<div class="thumb">
+								<img class="f-img img-fluid mx-auto" src="img/b3.jpg" alt="">	
+							</div>
+							<div class="bottom d-flex justify-content-between align-items-center flex-wrap">
+								<div>
+									<img class="img-fluid" src="img/user.png" alt="">
+									<a href="#"><span>Mark Wiens</span></a>
+								</div>
+								<div class="meta">
+									13th Dec
+									<span class="lnr lnr-heart"></span> 15
+									<span class="lnr lnr-bubble"></span> 04
+								</div>
+							</div>							
+							<a href="#">
+								<h4>Portable Fashion for young women</h4>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exea.
+							</p>
+						</div>												
+											
+												
+					</div>
+				</div>	
+			</section>
+			<!-- end blog Area -->	
+	<style>
+
+
+
+	</style>
+ {%endblock%}
+
+

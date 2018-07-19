@@ -1,0 +1,60 @@
+
+ {%extends 'products/base.html'%}
+
+ {%block body%}
+
+
+	<!-- Start home-about Area -->
+ <br> <br> <br>
+
+
+
+			<section class="home-about-area section-gap" id="about">
+				<div class="container">
+						 {%if messages%}
+
+							{%for message in messages%}
+						<div align="center" class="alert alert-danger">
+							<strong>{{message}}</strong>
+						</div>
+							{%endfor%}
+						{%endif%}
+					 {%if form.errors%}
+					 <blockquote class="generic-blockquote">
+						<b>{{ form.username.errors }}{{ form.password1.errors }}{{form.password2.errors}}</b>
+					 </blockquote>
+					{%endif%}
+					<div class="row justify-content-center align-items-center">
+						<div class="col-lg-8 col-md-12 home-about-left">
+
+							<h1>
+								We’ve made Signup <br>
+								easy for you
+							</h1>
+							<p class="sub">Enter Just Some basic details.</p>
+							<p class="pb-20">
+							 Already have an <b>Google</b> or <b>Facebook</b> account<br>
+								click on sign in to continue
+							</p>
+							<a class="primary-btn" href="/accounts/login">Sign In</a>
+						</div>
+						<div class="col-lg-4 col-md-12 home-about-right relative">
+							<form class="form-wrap" action="/accounts/signup" method="post" enctype="multipart/form-data">
+								{%csrf_token%}
+								<h4 class="text-white pb-20">Sign Up</h4>
+								<input type="text" name="username" id="id_username" placeholder="username" maxlength="150" required class="form-control" autofocus onkeyup="check_login(this);return false;" data-url="/accounts/check_username"/>
+									{{form.email}}
+									{{form.first_name}}
+									{{form.last_name}}
+									{{form.password1}}
+									{{form.password2}}
+									<button class="primary-btn">Sign Up</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- End home-about Area -->
+
+ {%endblock%}

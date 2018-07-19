@@ -1,0 +1,66 @@
+{%extends 'products/base.html'%}
+
+{%block body%}
+<section class="project-area section-gap" id="project"><br><br>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-8 pb-30 header-text text-center">
+							<h1 class="mb-10">All Orders</h1><br>
+                               <input class="form-control" id="myInput" type="text" placeholder="Search..">
+
+						</div>
+					</div>
+					<div class="row">
+                        <div class="table-responsive">
+			     <table class="table" style="box-shadow: 10px 10px 5px 5px #888;">
+    		<thead>
+        <tr>
+            <th>S. No.</th>
+            <th>Order No.</th>
+            <th>Ordered by</th>
+            <th>Order Time</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+            </thead>
+
+            <tbody id="myTable">
+    {% for checkout in all_checkouts%}
+        <tr>
+           <td>{{forloop.counter}}</td>
+            <td>  {{checkout.order_id}}</td>
+            <td>{{checkout.user.first_name}} {{checkout.user.last_name}}</td>
+            <td>{{checkout.order_time}}</td>
+            <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{checkout.total_price}}</td>
+            {% if checkout.status%}
+            <td><i class="fa fa-3x fa-check-circle-o" aria-hidden="true"></i></td>
+            {%else%}
+            <td><i class="fa fa-3x fa-question-circle" aria-hidden="true"></i></td>
+            {%endif%}
+            <td> <a href="/manager/order/{{checkout.id}}" class="btn btn-sm primary-btn">View</a></td>
+
+
+
+
+
+        </tr>
+    {%endfor%}
+            </tbody>
+                 </table>
+                        </div>
+                    </div>
+                </div>
+    </section>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{%endblock%}

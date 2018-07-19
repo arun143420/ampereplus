@@ -1,0 +1,162 @@
+ {%extends 'products/base.html'%}
+
+ {%block body%}
+
+	<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>
+				<div class="container">
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+								Campus Ambassador
+							</h1>
+							<p class="text-white link-nav"><a href="/">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/products"> {{request.user}} Cart</a></p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+<section class="home-about-area section-gap" id="about" style="background-color:white;">
+				<div class="container">
+						 {%if messages%}
+
+							{%for message in messages%}
+						<div align="center" class="alert alert-danger">
+							<strong>{{message}}</strong>
+						</div>
+							{%endfor%}
+						{%endif%}
+
+
+
+							<div class="section-top-border">
+						<h2 class="mb-30"> Are You Ready to  become
+                            a campus ambassador?</h2><br><br>
+						<div class="row">
+							<div class="col-lg-12">
+								<h4 class="sub"><b>Who is a campus ambassador?</b></h4>
+								<blockquote class="generic-blockquote">
+									A campus ambassador internship or internship is where you
+								work for the company at your college for promoting and advertising
+								the business among your classmates and other students, the ambassador
+								is also paid for that . <br>
+							  It is a unique opportunity for students to enhance their
+								skills in the fields of publicity, marketing, networking ,and
+								maintaining public relations at a national level by acting as the
+								Campus Ambassador for their college.
+								</blockquote>
+							</div>
+							<hr>
+							<div class="col-lg-12"><br><br>
+								<h4 class="sub"><b>Who can become a Campus Ambassador?</b></h4>
+								<blockquote class="generic-blockquote">
+									 Any College Student with a valid College Student Identity Card.
+								</blockquote>
+							</div>
+							<div class="col-lg-12"><br><br>
+								<h4 class="sub"><b>How to become a College Ambassador and what You get?</b></h4>
+								<blockquote class="generic-blockquote">
+									 By Simply Filling the form mentioned below.<br>
+									After that we will review your form and conduct an interview for checking your
+									concern and skills.
+								</blockquote>
+							</div>
+
+							<div class="col-lg-12"><br><br>
+								<h4 class="sub"><b>what You get?</b></h4>
+								<blockquote class="generic-blockquote">
+								<ul>
+									<li>An Experience certificate.</li>
+									<li>A Campus Ambassador Certificate.</li>
+									<li>Some gift hampers.</li>
+									</ul>
+
+								</blockquote>
+							</div>
+
+
+
+							</div>
+						</div>
+					</div>
+
+ </section>
+
+<section style="background-color:white;">
+
+	 <div class="container">
+
+								<h2 class="mb-30" align="center">Enter Your Details</h2>
+		 			<div class="row">
+						<div class="col-sm-3"></div>
+		 					<ul  class="unordered-list">
+								<li><b>Name:</b>&nbsp;{{request.user.first_name}}&nbsp;{{request.user.last_name}}</li>
+									<li><b>Email:</b>&nbsp;{{request.user.email}}</li>
+								{%if request.user.profile.tc%}
+								<li><b>Contact no.:</b>{{request.user.profile.phone}}</li>
+		 						<li><b>Address:</b>&nbsp;{{request.user.profile.address}}&nbsp; <br>
+									{{request.user.profile.zipcode}}<br>
+								{{request.user.profile.area}}</li>
+							{%endif%}
+
+
+							</ul>
+						</div><br><br>
+						<div class="row justify-content-center align-items-center">
+
+
+
+								<form method="post" action="/Ambassador/campus_ambassador">
+									{%csrf_token%}
+								<div class="mt-10">
+									{%if not request.user.profile.tc%}
+									<p><label for="id_address"><b>Your Address:</b></label>
+									<input type="text" name="address" required id="id_address" maxlength="50" placeholder="e:g block 2 moti nagar" class="single-input" /></p>
+									<p><label for="id_zipcode"><b>Your Zipcode:</b></label>
+									<input type="text" name="zipcode" required id="id_zipcode" maxlength="50" placeholder="e:g 180007" class="single-input" /></p>
+
+									<p><label for="id_phone"><b>Your Contact No.:</b></label>
+									<input type="text" name="phone" required id="id_phone" maxlength="10" placeholder="e:g 9906138916" class="single-input" /></p>
+
+
+									<p><label for="id_area"><b>Your Area:</b></label>
+									<input type="text" name="area" required id="id_area" maxlength="50" placeholder="e:g New delhi, DTU" class="single-input" /></p>
+									<input type="hidden" name="check" value="true">
+									{%else%}
+									<input type="hidden" name="check" value="false">
+
+
+									{%endif%}
+									<p><label for="id_college_address"><b>College address:</b></label> <input type="text" name="college_address" required id="id_college_address" maxlength="50" placeholder="e:g New delhi, DTU" class="single-input" /></p>
+									<p><label for="id_college_name"><b>College name:</b></label> <input type="text" name="college_name" required id="id_college_name" maxlength="100" placeholder="e:g MIET" class="single-input" /></p>
+									<p><label for="id_college_year"><b>College year:</b></label> <input type="text" name="college_year" required id="id_college_year" maxlength="5" placeholder="1, 2 ,3...." class="single-input" /></p>
+<p><label for="id_skills"><b>Skills:</b></label> <input type="text" name="skills" required id="id_skills" maxlength="100" placeholder="e:g JAVA, Python, C, Data Analysis..." class="single-input" /></p>
+<p><label for="id_motive"></label> <textarea name="motive" rows="10" placeholder="Write few lines to explain your motive for becoming a campus ambassador." class="single-textarea" cols="40" required id="id_motive" maxlength="1000">
+</textarea></p>
+<p><label for="id_responsibility"></label> <textarea name="responsibility" rows="10" placeholder="Write few lines to explain any responsibilty related work you have done in your college" class="single-textarea" cols="40" required id="id_responsibility" maxlength="1000">
+</textarea></p>
+
+									</div>
+
+
+	<button class="primary-btn btn btn-block">Submit Your Application</button><br><br>
+
+								</form>
+						</div>
+							</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
