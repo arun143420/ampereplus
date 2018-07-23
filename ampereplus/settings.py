@@ -62,11 +62,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'manager'
 
-
-
-
-
-
 ]
 
 
@@ -200,8 +195,8 @@ USE_TZ = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_QUERY_EMAIL = True
-LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/services_products#project"
+LOGOUT_REDIRECT_URL = "/accounts/login"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 

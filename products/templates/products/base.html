@@ -60,7 +60,7 @@
 			    	<div class="row align-items-center justify-content-between d-flex">
 				      <div id="logo">
 						  {%load staticfiles%}
-				        <a href="/"><img width="136px" height="43px" src="http://ampereplus.com/wp-content/uploads/2018/04/AF-PNG-small.png" alt="" title="" /></a>
+				        <a href="/"><img width="136px" height="43px" src="{% static 'products/img/logo.png'%}" alt="" title="" /></a>
 				      </div>
 				      <nav id="nav-menu-container">
 				        <ul class="nav-menu">
@@ -71,7 +71,7 @@
 
 
 							{% if user.is_authenticated %}
-				          <li><a href="/services_products">PRODUCTS &<br> Services</a></li>
+				          <li><a href="/services_products">PRODUCTS & Services</a></li>
 
 				          <li class="menu-has-children"><a href="#">Ambassador </a>
 						  <ul>

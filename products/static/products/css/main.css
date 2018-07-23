@@ -3566,11 +3566,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 	box-sizing: border-box;
 }
 
-body {
-  background:#FAFAFB;
-}
 
-.table {
+table {
   border-collapse: separate;
   background:#fff;
   @include border-radius(5px);

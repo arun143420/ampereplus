@@ -28,7 +28,8 @@ def contact_us_view(request):
         contact_us.subject = subject
         contact_us.message = message
         contact_us.save()
-        return HttpResponseRedirect('/contact_us')
+        messages.success(request, "your Query Submitted Successfully ")
+        return HttpResponseRedirect('/contact_us#contact')
 
     else:
         return render(request, 'products/contact.html', {})

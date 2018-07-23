@@ -19,10 +19,22 @@
 			<!-- End banner Area -->				  
 
 			<!-- Start contact-page Area -->
-			<section class="contact-page-area section-gap">
-				<div class="container">
+			<section class="contact-page-area section-gap" id="contact">
+				<div class="container" >
+					{%if messages%}
+					{%for message in messages%}
+							<div align="center" class="alert alert-success">
+								 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>{{message}}</strong>
+							</div>
+							{%endfor%}
+					{%endif%}
+
 					<div class="row">
 						<div class="map-wrap" style="width:100%; height: 445px;" id="map"></div>
+
+
+
 						<div class="col-lg-4 d-flex flex-column address-wrap">
 							<div class="single-contact-address d-flex flex-row">
 								<div class="icon">
@@ -52,7 +64,10 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-8">
+
+
+						<div class="col-lg-8" >
+
 							<form  action="/contact_us" method="post" class="form-area contact-form text-right" enctype="multipart/form-data">
 								{%csrf_token%}
 								<div class="row">	

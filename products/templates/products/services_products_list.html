@@ -63,6 +63,14 @@
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-md-8 pb-30 header-text text-center">
+						{%if messages%}
+
+							{%for message in messages%}
+						<div align="center" class="alert alert-success">
+							<strong>{{message}}</strong>
+						</div><br>
+							{%endfor%}
+						{%endif%}
 							<h1 class="mb-10">Our Products</h1>
 
 								<a class="primary-btn" href="/products/cart">View my Cart</a>
@@ -71,66 +79,96 @@
 					</div>
 					<div class="row">
 
-						 <div class="table-responsive">
 
-							 <table class="table" style="box-shadow: 10px 10px 5px 5px #888;">
-    		<thead >
-        <tr>
-            <th>S. No.</th>
-            <th>Name</th>
-            <th>Features</th>
-		 	<th>Quantity</th>
-            <th id="price-tag">Price in <i class="fa fa-inr" aria-hidden="true"></i>&nbsp;</th>
-            <th>Action</th>
+						<table class="table" role="table" style="box-shadow: 10px 10px 5px 5px #888; border:4px solid #b2b2b2 "  >
+  <tbody role="rowgroup">
+         <tr role="row" >
+			 <td role="columnheader"><b>Product Name</b></td>
+			   <script>count = 0;</script>
+			 {% for product in products_list%}
 
+			 <td  role="columnheader"><h5>{{product.prod_name}}<br>
+				 <a href="/products/{{product.id}}"> <b>More Info&nbsp;<i class="fa fa-info-circle" aria-hidden="true"></i></b></a></h5></td>
+			   <script>
+		  count = count+1;
+	 	 </script>
+
+			{%endfor%}
         </tr>
 
 
-    </thead>
-    <tbody>
-	{% for product in products_list%}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{product.prod_name}}<br>
 
-				<a href="/products/{{product.id}}"><b><i class="fa fa-info-circle" aria-hidden="true"></i>Info</b></a>
 
-			</td>
-            <td><b>Communication format:-</b>
-				{{product.communication_format}}<br>
+<tr>
+	<td  id="fet" align="center"> <h5><b>Features</b></h5></td>
+	<script>
+		document.getElementById("fet").colSpan = count+1;
+	</script>
 
-				<b>Portal type:</b>
-				{{product.PortType }}<br>
+</tr>
+<tr>
+	<td><b>Communication <br>Format:</b></td>
+		 {% for product in products_list%}
+	<td>{{product.communication_format}}</td>
+	{%endfor%}
 
-				<b>Power source on chip:-</b>
-				{{product.PowerSource}}<br>
+</tr>
 
-				<b>Storage:-</b>
-				{%if product.storage%}
-					Yes
+<tr>
+	<td><b>Portal Type:</b></td>
+		 {% for product in products_list%}
+	<td>{{product.PortType }}</td>
+	{%endfor%}
+
+</tr>
+<tr>
+	<td><b>Power Source:</b></td>
+		 {% for product in products_list%}
+	<td>{{product.PowerSource}}</td>
+	{%endfor%}
+
+</tr>
+<tr>
+	<td><b>Storage</b></td>
+		 {% for product in products_list%}
+	<td>{%if product.storage%}
+					<i class="fa fa-check" aria-hidden="true"></i>
 				{%else%}
-					No
-				{%endif%}
-				<br>
+					<i class="fa fa-times" aria-hidden="true"></i>
+		{%endif%}
+	</td>
+	{%endfor%}
 
-				<b>Antenna:-</b>
-				{%if product.antenna%}
-					Yes
+</tr>
+<tr>
+	<td><b>Antenna:</b></td>
+		 {% for product in products_list%}
+	<td>{%if product.antenna%}
+					<i class="fa fa-check" aria-hidden="true"></i>
 				 {%else%}
-					No
+					<i class="fa fa-times" aria-hidden="true"></i>
 				{%endif%}
+</td>
+	{%endfor%}
 
-				<br>
-				<b>RTC:-</b>
-
-				{% if product.rtc%}
-					Yes
+</tr>
+<tr>
+	<td><b>RTC:</b></td>
+		 {% for product in products_list%}
+	<td>{% if product.rtc%}
+					<i class="fa fa-check" aria-hidden="true"></i>
 				{%else%}
-					No
+					<i class="fa fa-times" aria-hidden="true"></i>
 				{%endif%}
+</td>
+	{%endfor%}
 
-			</td>
-			<td><div class="form-select" id="default-select">
+</tr>
+ <tr>
+			 <td><b>Quantity</b></td>
+			  {% for product in products_list%}
+
+			 <td role="cell"><div class="form-select" id="default-select">
 											<select id="choice{{product.id}}"  onChange="costFunction{{product.id}}()">
 
 												<option value="" selected disabled hidden>-----</option>
@@ -143,17 +181,63 @@
 											</select>
 										</div>
 			</td>
-            <td id="product{{product.id}}">{{product.sell_price}}</td>
-            <td>
-				<form id="product-form{{product.id}}" method="post" action="">
+			 {%endfor%}
+		 </tr>
+
+
+    <tr>
+	  <td><b>Price in <i class="fa fa-inr" aria-hidden="true"></i></b></td>
+	   {% for product in products_list%}
+	   <td  role="cell" id="product{{product.id}}">{{product.sell_price}}</td>
+	  {%endfor%}
+  </tr>
+
+
+  <tr>
+	  <td><b>Add to Cart</b></td>
+
+	  {% for product in products_list%}
+	  <td>
+		  	<form id="product-form{{product.id}}" method="post" action="">
 					<input type="hidden" id="actual{{product.id}}">
 
 
-				<button id="btn{{product.id}}" class="genric-btn primary-border circle">Cart</button>
-				</form></td>
+				<button onmouseover="" id="btn{{product.id}}" class="genric-btn primary radius btn"> Cart</button>
+				</form>
+	  </td>
+
+	<script>
 
 
-        </tr>
+
+</script>
+	  {%endfor%}
+  </tr>
+
+    </tbody>
+
+ </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	{% for product in products_list%}
+
 			<script>
 			document.getElementById('btn{{product.id}}').disabled = true;
 			function costFunction{{product.id}}(){
@@ -208,6 +292,7 @@
 				var discount= (actual_cost)*per;
 				var total_cost =actual_cost-discount;
 				var new_cost = document.getElementById('product{{product.id}}').innerHTML= total_cost;
+				document.getElementById('product{{product.id}}').style.fontWeight = "1000";
 
 
 				 }
@@ -236,9 +321,50 @@
 
 	{%endfor%}
 
-	</tbody>
-							 </table>
-						 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 					</div>
 				</div>	
@@ -246,13 +372,81 @@
 			<!-- End project Area -->
 
 <style>
-	.table {
+
+
+
+
+table {
   border-collapse: separate;
   background:#fff;
   @include border-radius(5px);
   margin:10px auto;
   @include box-shadow(0px 0px 5px rgba(0,0,0,0.3));
 }
+
+thead {
+  @include border-radius(5px);
+	background-color:#4c4c4c;
+}
+
+thead th {
+  font-family: 'Patua One', cursive;
+  font-size:16px;
+  font-weight:400;
+  color:#fff;
+  @include text-shadow(1px 1px 0px rgba(0,0,0,0.5));
+  text-align:left;
+  padding:10px;
+  @include background-image(linear-gradient(#646f7f, #4a5564));
+  border-top:1px solid #858d99;
+
+  &:first-child {
+   @include border-top-left-radius(5px);
+  }
+
+  &:last-child {
+    @include border-top-right-radius(5px);
+  }
+}
+
+tbody tr td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight:400;
+  color:#5f6062;
+  font-size:13px;
+  padding:20px 20px 20px 20px;
+  border-bottom:1px solid #e0e0e0;
+
+}
+
+tbody tr:nth-child(2n) {
+  background:#f0f3f5;
+}
+
+tbody tr:last-child td {
+  border-bottom:none;
+  &:first-child {
+    @include border-bottom-left-radius(5px);
+  }
+  &:last-child {
+    @include border-bottom-right-radius(5px);
+  }
+}
+
+tbody:hover > tr td {
+  @include opacity(0.5);
+
+  /* uncomment for blur effect */
+  /* color:transparent;
+  @include text-shadow(0px 0px 2px rgba(0,0,0,0.8));*/
+}
+
+tbody:hover > tr:hover td {
+  @include text-shadow(none);
+  color:#2d2d2d;
+  @include opacity(1.0);
+}
+
 </style>
 
 
