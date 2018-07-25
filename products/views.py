@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 from accounts.forms import ProfileForm
 from django.contrib import messages
 from manager.models import CartManager
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.core.mail import send_mail
+from django.conf.global_settings import DEFAULT_FROM_EMAIL
 
 
 def homepage(request):
@@ -29,7 +31,15 @@ def contact_us_view(request):
         contact_us.message = message
         contact_us.save()
         messages.success(request, "your Query Submitted Successfully ")
-        return HttpResponseRedirect('/contact_us#contact')
+        send_mail(
+            subject=subject,
+            message="Name:" + " " + name + '\n\n' + "sender:" + " " + email + '\n' + message,
+            from_email=email,
+            recipient_list=['arun.57-cse-15@mietjammu.in'],
+            fail_silently=False,
+            )
+
+        return HttpResponseRedirect('/contact_us')
 
     else:
         return render(request, 'products/contact.html', {})
@@ -151,3 +161,11 @@ def order_cnf_view(request):
 
     else:
         return HttpResponseRedirect('/')
+
+
+def error_404(request):
+    return HttpResponse('ERRROR')
+
+
+def error_500(request):
+    pass

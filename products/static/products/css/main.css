@@ -2020,17 +2020,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu li {
   position: relative;
-  white-space: nowrap;
+
 }
 
 .nav-menu > li {
   float: left;
 }
 
-.nav-menu li:hover > ul,
-.nav-menu li.sfHover > ul {
-  display: block;
-}
+
 
 .nav-menu ul ul {
   top: 0;
@@ -2060,6 +2057,29 @@ h1, h2, h3, h4, h5, h6 {
   content: "\f105";
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Nav Meu Container */
 #nav-menu-container {
   margin: 0;
@@ -2078,14 +2098,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu a:hover {
-  padding: 0 8px 0px 8px;
-  text-decoration: none;
-  display: inline-block;
-  color: #fabe19;
-  font-weight: 400;
 
-  text-transform: uppercase;
-  outline: none;
+  color: #fabe19;
+
 }
 
 
@@ -3432,6 +3447,48 @@ body.mobile-nav-active #mobile-nav-toggle {
                Start Blog Details  Page style
 ################
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .nav-area {
   border-bottom: 1px solid #eee;
 }

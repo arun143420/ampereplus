@@ -17,11 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from products import views
+from products import views as product_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import handler400,handler500
 
 
 urlpatterns = [
+
     url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('allauth.urls')),
     path('', views.homepage, name='home'),
@@ -34,5 +37,6 @@ urlpatterns = [
     url(r'^manager/', include('manager.urls')),
 
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+handler404 = product_views.error_404

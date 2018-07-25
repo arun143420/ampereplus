@@ -4,6 +4,17 @@
  {%block body%}
 
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+
+
+</script>
+
+
 	<!-- Start home-about Area -->
  <br> <br> <br>
 
@@ -42,12 +53,25 @@
 							<form class="form-wrap" action="/accounts/signup" method="post" enctype="multipart/form-data">
 								{%csrf_token%}
 								<h4 class="text-white pb-20">Sign Up</h4>
-								<input type="text" name="username" id="id_username" placeholder="username" maxlength="150" required class="form-control" autofocus onkeyup="check_login(this);return false;" data-url="/accounts/check_username"/>
+									<input type="text" name="username" id="id_username" autocomplete="off"  placeholder="username" maxlength="150"  class="form-control"
+									 data-toggle="popover" data-trigger="focus" data-content="{{form.username.help_text}}"/>
 									{{form.email}}
 									{{form.first_name}}
 									{{form.last_name}}
-									{{form.password1}}
-									{{form.password2}}
+
+									<input type="password" name="password1" id="id_password1" required class="form-control" placeholder="password"
+									data-toggle="popover"   data-trigger="focus"
+									data-content="	1. Your password can't be too similar to your other personal information.&#x0a;&#x0a;&#x0a;
+													2. Your password can't be entirely numeric. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+													3. Your password can't be a commonly used password. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+													4. Your password must contain at least eight characters.  "
+									data-htm/>
+
+									<input type="password" name="password2" id="id_password2" required class="form-control" placeholder="Renter Password"
+									data-toggle="popover" data-trigger="focus"   data-content="{{ form.password2.help_text}}"/>
 									<button class="primary-btn">Sign Up</button>
 							</form>
 						</div>
@@ -56,5 +80,26 @@
 			</section>
 
 			<!-- End home-about Area -->
+<style>
+@media only screen and (max-width: 600px) {
+.popover {
+height:60px;
+overflow-y:auto;
+overflow-x:hidden;
+background-color:f2f2f2;
+
+
+		top: 50px !important;
+		left: 39px !important;
+
+		}
+
+
+
+
+}
+</style>
+
+
 
  {%endblock%}

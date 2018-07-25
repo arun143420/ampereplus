@@ -172,7 +172,7 @@ $(document).ready(function(){
         margin: 100,
         dots: true,
         nav:true,
-        navText: ["<span class='lnr lnr-arrow-up'></span>","<span class='lnr lnr-arrow-down'></span>"],                
+        navText: ["<span class='lnr lnr-arrow-up'></span>","<span class='lnr lnr-arrow-down'></span>"],
         autoplay:true,
         responsive: {
             0: {
