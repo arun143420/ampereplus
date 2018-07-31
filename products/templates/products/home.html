@@ -27,61 +27,46 @@
 
 
 
- 	<!-- Start services Area -->
+
+			<!-- Start services Area -->
 			<section class="cat-area section-gap aboutus-cat" id="feature">
 				<div class="container">
 						<div class="col-md-12 pb-30 header-text text-center">
-							<h1 class="mb-10">Our Services </h1>
+							<h1 class="mb-10">Our Offered Services to you</h1>
 							<p>
 								Who are in extremely love with eco friendly system..
 							</p>
 						</div>
 					<div class="row">
+					{%if services_list%}
+						{% for service in services_list%}
 						<div class="col-lg-3">
 							<div class="single-cat d-flex flex-column">
-								<a href="/products/service/solar-epc" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-cloud-check"></span></span></a>
-								<h4 class="mb-20" style="margin-top: 23px;">Solar EPC</h4>
+								 <a href="/services/{{service.id}}"> <img src="{{service.service_logo.url}}" alt="" class="img-fluid"></a>
+								<a href=""><h4 class="mb-20" style="margin-top: 23px;">{{service.service_name}}</h4></a>
 								<p>
-									Cloud Based Energy Monitoring IoT system which enable us to collect, organise & analyse billions of data pointers to improve the infrastructure of the future
+									{{service.service_desc}}
 								</p>
 							</div>
 						</div>
-						<div class="col-lg-3">
-							<div class="single-cat">
-								<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-home"></span></span></a>
-								<h4 class="mt-40 mb-20">Solar Consultancy</h4>
-								<p>
-						 			Engineer your way to big savings from Solar. Why pay money for electricity when solar is shining on your roof. Like a farmer invest in crops, solar power plant is investment for energy
-								</p>
-							</div>
+						{%endfor%}
+					{%else%}
+						<div class="col-lg-12" align="center">
+
+							<h1><u>SERVICES COMING SOON</u><h1>
+							{%if user.is_superuser%}
+								<br>
+							<a href="/admin/services/service/" class="genric-btn primary radius btn">Add Services</a>
+							{%endif%}
 						</div>
 
-                        	<div class="col-lg-3">
-							<div class="single-cat d-flex flex-column">
-								<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-cloud-check"></span></span></a>
-								<h4 class="mb-20" style="margin-top: 23px;">B-Hive</h4>
-								<p>
-									Cloud Based Energy Monitoring IoT system which enable us to collect, organise & analyse billions of data pointers to improve the infrastructure of the future
-								</p>
-							</div>
 						</div>
 
-                        	<div class="col-lg-3">
-							<div class="single-cat d-flex flex-column">
-								<a href="#" class="hb-sm-margin mx-auto d-block"><span class="hb hb-sm inv hb-facebook-inv"><span class="lnr lnr-cloud-check"></span></span></a>
-								<h4 class="mb-20" style="margin-top: 23px;">Campus</h4>
-								<p>
-									Cloud Based Energy Monitoring IoT system which enable us to collect, organise & analyse billions of data pointers to improve the infrastructure of the future
-								</p>
-							</div>
-						</div>
+					{%endif%}
 
 					</div>
-				</div>
 			</section>
 			<!-- End services Area -->
-
-
 
 		 
 

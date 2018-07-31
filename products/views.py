@@ -3,20 +3,17 @@ from products.models import Product, Cart, Checkout
 from accounts.models import ContactUs, GuestUser
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
 from accounts.forms import ProfileForm
 from django.contrib import messages
 from manager.models import CartManager
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.core.mail import send_mail
-from django.conf.global_settings import DEFAULT_FROM_EMAIL
-import random
+from services.models import Service
 
 
 def homepage(request):
-    products = Product.objects.all()
-
-    return render(request, 'products/home.html', {'products':products})
+    services_list = Service.objects.all()
+    return render(request, 'products/home.html', {'services_list':services_list})
 
 
 def contact_us_view(request):
@@ -52,8 +49,10 @@ def about_view(request):
 
 def products_list_view(request, pk=None):
     product_list = Product.objects.all()
+    service_list = Service.objects.all()
     context = {
-        'products_list': product_list
+        'products_list': product_list,
+        'services_list': service_list
     }
     return render(request, 'products/services_products_list.html', context)
 

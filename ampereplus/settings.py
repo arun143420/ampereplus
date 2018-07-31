@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'manager',
     'allauth',
+    'services'
 
 
 ]

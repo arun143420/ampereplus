@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^products/', include('products.urls')),
     url(r'^Ambassador/', include('Ambassador.urls')),
     url(r'^manager/', include('manager.urls')),
+    url(r'^services/', include('services.urls')),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
