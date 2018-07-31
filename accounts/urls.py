@@ -18,13 +18,12 @@ urlpatterns = [
 
     # ---------------------------------------PASSWORD CHANGE-----------------------------------------------------------
 
-    url(r'^password-change/$', auth_views.password_change, {'template_name': 'registration/password_change_form.html',
-                                                            'post_change_redirect': 'registration/password_change_done/'
-                                                            },
+    url(r'^password-change/$', auth_views.password_change, {'template_name': 'accounts/password_change_form.html',
+                                                            'post_change_redirect': 'accounts/password_change_done/'},
         name='password_change'),
 
-    url(r'^password-change/registration/password_change_done/$', auth_views.password_change_done,
-        {'template_name': 'registration/password_change_done.html'}, name='password_change_done'),
+    url(r'^password-change/accounts/password_change_done/$', auth_views.password_change_done,
+        {'template_name': 'accounts/password_change_done.html'}, name='password_change_done'),
 
     # ----------------------------------------PASSWORD RESET------------------------------------------------------------
 

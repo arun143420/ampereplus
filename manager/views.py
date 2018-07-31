@@ -1,14 +1,11 @@
 from django.shortcuts import render
-from products.models import Product, Cart, Checkout
-from accounts.models import ContactUs
+from products.models import Checkout
 from django.shortcuts import get_object_or_404
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from accounts.forms import ProfileForm
-from django.contrib import messages
-from manager.models import CartManager
-from django.http import HttpResponseRedirect, JsonResponse
-from manager.models import CartManager
+from django.http import HttpResponseRedirect
+from accounts.models import GuestUser
+from django.contrib.auth.models import User
+
 
 
 @login_required
@@ -27,10 +24,21 @@ def order_detail_view(request, pk):
     if request.method == 'GET':
         if request.user.is_superuser or request.user.is_staff:
             checkout = get_object_or_404(Checkout, pk=pk)
-            context = {
-                'checkout': checkout
-            }
-            return render(request, 'manager/order_detail.html', context)
+            guest = GuestUser.objects.filter(checkout=checkout).exists()
+            print(guest)
+            if guest:
+                guest_data = get_object_or_404(GuestUser, checkout=checkout)
+                context = {
+                    'checkout': checkout,
+                    'guest': guest_data
+
+                }
+                return render(request, 'manager/order_detail.html', context)
+            else:
+                context = {
+                    'checkout': checkout,
+                }
+                return render(request, 'manager/order_detail.html', context)
 
 
 @login_required
@@ -51,3 +59,15 @@ def order_status_view(request, pk):
             HttpResponseRedirect('/')
     else:
         return HttpResponseRedirect('/')
+
+
+@login_required
+def users_list_view(request):
+    if request.method == 'GET':
+        if request.user.is_superuser or request.user.is_staff:
+            all_users = User.objects.filter().exclude(username = request.user.username)
+            guest_users = GuestUser.objects.all()
+            context = {'all_users': all_users,
+                       'guest_users': guest_users}
+            return render(request, 'manager/all_users.html', context)
+

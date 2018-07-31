@@ -35,7 +35,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs. \
             update({
 
-            'class':'form-control',
+            'class':'single-input',
             'name':'pass',
             'placeholder': 'password',
 
@@ -43,7 +43,7 @@ class SignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs. \
             update({
 
-            'class': 'form-control',
+            'class': 'form-control ',
             'placeholder':'username',
 
 

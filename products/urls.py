@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)', views.product_detail, name='product_view'),
     url(r'^cart', views.cart_view, name='cart_list'),
     url(r'^order/confirm', views.order_cnf_view, name='order_cnf'),
+    url(r'^service/solar-epc', views.solar_epc_view, name='solar_epc'),
 
-]
+    ]

@@ -5,7 +5,7 @@
 				<div class="container">
                     <div class="typography">
 
-                     <h1 class="mb-10" align="center">All Orders</h1><br>
+                     <h1 class="mb-10" align="center">All USERS</h1><br>
                     </div>
 					<div class="row">
 
@@ -26,40 +26,43 @@
     		<thead>
         <tr>
             <th>S. No.</th>
-            <th>Order No.</th>
-            <th>Order Time</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th>Action</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Address</th>
+
         </tr>
             </thead>
-
             <tbody id="myTable">
-    {% for checkout in all_checkouts%}
-        <tr>
-           <td>{{forloop.counter}}</td>
-            <td>{{checkout.order_id}}</td>
-            <td>{{checkout.order_time}}</td>
-            <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{checkout.total_price}}</td>
-            {% if checkout.status%}
-            <td><i class="fa fa-3x fa-check-circle-o" aria-hidden="true"></i></td>
-            {%else%}
-            <td><i class="fa fa-3x fa-question-circle" aria-hidden="true"></i></td>
-            {%endif%}
-            <td> <a href="/manager/order/{{checkout.id}}" class="btn btn-sm primary-btn">View</a></td>
+            <script>var count =0;</script>
+            {% for auth_user in all_users%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{auth_user.first_name}}&nbsp; {{auth_user.last_name}}</td>
+                <td>{{auth_user.email}}</td>
+                <td>{{auth_user.profile.phone}}</td>
+                <td>{{auth_user.profile.address}}</td>
+            </tr>
+            <script>count = count+1;</script>
+            {%endfor%}
 
-
-
-
-
-        </tr>
-    {%endfor%}
+                <script>count = count+1;</script>
+              {% for guest_user in guest_users%}
+            <tr>
+                <td><script>document.write(count);</script></td>
+                <td>{{guest_user.name}}</td>
+                <td>{{guest_user.email}}</td>
+                <td>{{guest_user.phone}}</td>
+                <td>{{guest_user.address}}</td>
+            </tr>
+            <script>count = count+1;</script>
+            {%endfor%}
             </tbody>
                  </table>
                         </div>
                     </div>
                 </div>
-    </section>
+</section>
 
 <script>
 $(document).ready(function(){

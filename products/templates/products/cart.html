@@ -1,88 +1,86 @@
   {%extends 'products/base.html'%}
 
  {%block body%}
-	<section class="home-about-area section-gap" id="about">
-				<div class="container">
-					<div class="row justify-content-center align-items-center">
-						<div class="col-lg-8 col-md-12 home-about-left" >
 
 
 
 
 
 
+  <div class="section-top-border home-about-area" style="margin-top:100px;">
 
-    {%if cart_items%}
+	<div class="container">
+		{%if cart_items%}
+						<div class="row">
 
-							<h1 class="mb-10" align="center"  >
-                             your cart is ready<br>
-                             you can checkout.
-							</h1>
+							<div class="col-lg-7 col-md-7">
 
-					{%if messages%}
+									<h1 class="mb-10" align="center">
+											 your cart is ready<br>
+											 you can checkout</h1>
+				{%if messages%}
 
 					{%for message in messages%}
 							<div align="center" class="alert alert-danger">
 								 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								<strong>{{message}}</strong>
 							</div>
-						{%endfor%}
-			    	{%endif%}
-
-<div class="table-responsive" id="cart">
- <table class="table">
-   <thead>
-        <tr>
-            <th>S. No.</th>
-            <th>Name</th>
-            <th>Quantity</th>
-            <th>Actual Price</th>
-		 	<th>After Discount</th>
-			<th>Action</th>
-        </tr>
-    </thead>
-  <tbody>
-    <script>
-
-     var count = 0;
-
-    </script>
-
-    {% for item in cart_items%}
-        <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{item.product.prod_name}}</td>
-            <td>{{item.quantity}}</td>
-            <td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.actual_prices}}</td>
-			<td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.product_prices}}</td>
-			<td>
-
-				<a href="/products/{{item.id}}/delete" type="submit"    class="btn btn-danger btn-md" >
-				   <i class="fa fa-trash" aria-hidden="true"></i>
-				</a></td>
-        </tr>
-
-        <script>
-         count = count+{{item.product_prices}}
-        </script>
-        {%endfor%}
-  </tbody>
-
- </table>
-</div>
-         <h3 align="center" id="total">Total:-
-          <script>
-                  document.write(count);
-          </script></h3>
+					{%endfor%}
+				{%endif%}
 
 
+								<div class="table-responsive" id="cart">
+									 <table class="table">
+									   <thead>
+											<tr>
+												<th>S. No.</th>
+												<th>Name</th>
+												<th>Quantity</th>
+												<th>Actual Price</th>
+												<th>After Discount</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										  <tbody>
+											<script>
 
- </div>
+											 var count = 0;
+
+											</script>
+
+											{% for item in cart_items%}
+												<tr>
+													<td>{{forloop.counter}}</td>
+													<td>{{item.product.prod_name}}</td>
+													<td>{{item.quantity}}</td>
+													<td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.actual_prices}}</td>
+													<td><i class="fa fa-inr" aria-hidden="true"></i>&nbsp;{{item.product_prices}}</td>
+													<td>
+
+														<a href="/products/{{item.id}}/delete" type="submit"    class="btn btn-danger btn-md" >
+														   <i class="fa fa-trash" aria-hidden="true"></i>
+														</a></td>
+												</tr>
+
+													<script>
+													 count = count+{{item.product_prices}}
+													</script>
+													{%endfor%}
+											  </tbody>
+
+ 										</table>
+								</div>
+										 <h3 align="center" id="total">Total:- <script>document.write(count);</script></h3>
+
+								 </div>
 
 
 
-							{%if request.user.profile.tc%}
-						<div class="col-lg-4 col-md-12  relative">
+				{%if request.user.is_authenticated%}
+
+							<div class="col-lg-5 col-md-5">
+								{%if request.user.profile.tc%}
+
 
 							<blockquote class="generic-blockquote">
 
@@ -98,8 +96,8 @@
 											<option value="Paytm">Paytm</option>
 
 										</select>
-										<input type="hidden" name="total_price" id="id_total">
-										<input type="hidden" name="order_no" id="id_order_no">
+										<input type="text" name="total_price" id="id_total_auth">
+										<input type="text" name="order_no" id="id_order_no_auth">
 										<br><br>
 										 <button class="btn btn-block genric-btn primary">Place Order</button>
 									</form>
@@ -121,42 +119,41 @@
 									</form>
 								</div>
 							</blockquote>
+    <script>
+	var x = Math.floor((Math.random() * 100000000) + 1);
+	document.getElementById("id_order_no_auth").setAttribute('value',x);
+	document.getElementById("id_total_auth").setAttribute('value',count);
+    </script>
 
 
 
+								{%else%} <!-- user profile -->
+									<blockquote class="generic-blockquote">
 
-<script>
-	var x = Math.floor((Math.random() * 1000000) + 1);
-
-	document.getElementById("id_order_no").setAttribute('value',x);
-	document.getElementById("id_total").setAttribute('value',count);
-</script>
-
-
-
-							{%else%}
-							<div class="col-lg-4 col-md-12 home-about-right relative">
+								<h3 class="mb-30">Add Delivery Address</h3>
 							<form id="profile_form" class="form-wrap" action="/products/cart" method="post" enctype="multipart/form-data">
 								{%csrf_token%}
-								<h4 class="text-white pb-20">Delivery Address details</h4>
-								<label for="id_address" style="color:white;">Address:</label>
-								<input  id="id_address" placeholder="Address" type="text" name="address" class="form-control" value="{{request.user.profile.address}}" required>
-								<label for="id_phone" style="color:white;">Contact no.:</label>
-								<input id="id_phone" placeholder="Phone Number" type="text" name="phone" class="form-control"  value="{{request.user.profile.phone}}" required>
-								<label for="id_zipcode" style="color:white;">Zipcode:</label>
-								<input id="id_zipcode" placeholder="ZipCode" type="text" name="zipcode" class="form-control" value=" {{request.user.profile.zipcode}}" required>
-								<label for="id_area" style="color:white;">Area:</label>
-								<input id="id_area" placeholder="Area" type="text" name="area" class="form-control" value="{{request.user.profile.area}}"  required>
-							 <div class="switch-wrap d-flex justify-content-between">
-										<p style="color:white;">Terms and Conditions:</p>
-										<div class="confirm-checkbox">
-											<input type="checkbox" id="confirm-checkbox" value="{{request.user.profile.tc}}" required>
-											<label for="confirm-checkbox"></label>
+								<div class="mt-10">
+								<label for="id_address" style="color:white;"><b>Address:</b></label>
+								<input  id="id_address" placeholder="Address" type="text" name="address" class="single-input" value="{{request.user.profile.address}}" required>
+									</div>
+									<label for="id_phone"  ><b>Contact no.:</b></label>
+								<input id="id_phone" placeholder="Phone Number" type="text" name="phone" class="single-input" value="{{request.user.profile.phone}}" required>
+								<label for="id_zipcode"><b>Zipcode:</b></label>
+								<input id="id_zipcode" placeholder="ZipCode" type="text" name="zipcode" class="single-input" value=" {{request.user.profile.zipcode}}" required>
+								<label for="id_area" ><b>Area:</b></label>
+								<input id="id_area" placeholder="Area" type="text" name="area" class="single-input" value="{{request.user.profile.area}}"  required>
+								<br><div class="switch-wrap d-flex justify-content-between">
+										<p> <b>Terms and Conditions:</b></p>
+										<div class="primary-checkbox">
+											<input type="checkbox" id="default-checkbox" value="{{request.user.profile.tc}}" required>
+											<label for="default-checkbox"></label>
 										</div>
 									</div>
-
 									<button class="primary-btn">Add Address</button>
 							</form>
+									</blockquote>
+
 
 	<script>
 
@@ -189,21 +186,73 @@
                 });
             });
 	</script>
-				</div>
-							{%endif%}
-				</div>
+
+	{%endif%}<!-- User Profile -->
+				 </div>
 
 
-{%else%}
-							<div align="center"><br><br>
-							<h1 >
-                             your cart is empty<br>
-                             start buying our products.
-							</h1>
+{%else%}<!-- user auth-->
+
+							<div class="col-lg-5 col-md-5">
+
+							<blockquote class="generic-blockquote">
+
+											<h4  class="mb-20">Enter Delivery Address</h4>
 
 
 
-							{%if messages%}
+									<form action="/products/order/confirm" method="post" enctype="multipart/form-data">
+										{%csrf_token%}
+										<label><b>Payment Mode:</b></label>
+										<select style="padding:10px;" name="payment" class=" btn btn-lg btn-block genric-btn primary-border radius">
+											<option value="Cod">COD</option>
+											<option value="PayPal">PayPal</option>
+											<option value="Paytm">Paytm</option>
+
+										</select>
+										<input type="hidden" name="total_price" id="id_total">
+										<input type="hidden" name="order_no" id="id_order_no">
+										<br><br>
+										<label for="id_guest_name"><b>Name:</b></label>
+										<input type="text" id="id_guest_name" class="single-input" autocomplete="off" name="guest_name">
+
+										<label for="id_guest_email"><b>Email:</b></label>
+										<input type="email" id="id_guest_email" class="single-input" autocomplete="off" name="guest_email" placeholder="exampla@example.com">
+
+										<label for="id_guest_address"><b>Address:</b></label>
+										<input type="text" id="id_guest_address" class="single-input" autocomplete="off" name="guest_address">
+
+										<label for="id_guest_number"><b>Contact no.:</b></label>
+										<input type="text" id="id_guest_number" class="single-input" autocomplete="off" name="guest_number" placeholder="9985163257" maxlength="10">
+
+										<label for="id_guest_zipcode"><b>Zip Code:</b></label>
+										<input type="text" id="id_guest_zipcode" class="single-input" autocomplete="off" name="guest_zipcode" maxlength="6">
+										<label for="id_guest_area"><b>Area:</b></label>
+										<input type="text" id="id_guest_area" class="single-input" autocomplete="off" name="guest_area">
+										<br>
+
+										 <button class="btn btn-block genric-btn primary">Place Order</button>
+									</form>
+
+								<hr>
+
+
+
+							</blockquote>
+							</div>
+							<script>
+	var x = Math.floor((Math.random() * 100000000) + 1);
+	document.getElementById("id_order_no").setAttribute('value',x);
+	document.getElementById("id_total").setAttribute('value',count);
+</script>
+
+{%endif%}<!-- user auth-->
+
+			 </div>
+	{%else%}<!-- Cart items -->
+
+
+				{%if messages%}
 
 					{%for message in messages%}
 							<div align="center" class="alert alert-danger">
@@ -211,27 +260,17 @@
 								<strong>{{message}}</strong>
 							</div>
 					{%endfor%}
-			{%endif%}
+				{%endif%}
 
-							<a href="/services_products/" class="genric-btn primary">All Products</a>
-							</div>
+			<h1 class="mb-10" align="center">your cart is empty<br>Add some items to Cart</h1>
 
- {%endif%}
-
-
-				</div>
-			</section>
+				<br>
+			 <a href="/services_products#project" class="btn btn-block genric-btn primary">Back to All Products</a>
 
 
 
-
-
-
-
-
-
-
-
-
+	{%endif%} <!-- Cart items -->
+		</div>
+  </div>
 
   {%endblock%}

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from products.models import Checkout
 
 
 class ContactUs(models.Model):
@@ -37,3 +38,17 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+
+class GuestUser(models.Model):
+    checkout = models.ForeignKey(Checkout, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=50, blank=False, null=True)
+    name = models.CharField(max_length=30, blank=False)
+    phone = models.CharField(max_length=10, blank=False)
+    area = models.CharField(max_length=30, blank=False)
+    address = models.CharField(max_length=60, blank=False)
+    zipcode = models.CharField(max_length=6, blank=False)
+    tc = models.BooleanField(blank=False, default=False)
+
+    def __str__(self):
+        return str(self.name) + " " + str(self.checkout)

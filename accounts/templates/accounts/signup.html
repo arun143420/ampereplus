@@ -26,14 +26,17 @@ $(document).ready(function(){
 
 							{%for message in messages%}
 						<div align="center" class="alert alert-danger">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 							<strong>{{message}}</strong>
 						</div>
 							{%endfor%}
 						{%endif%}
 					 {%if form.errors%}
-					 <blockquote class="generic-blockquote">
-						<b>{{ form.username.errors }}{{ form.password1.errors }}{{form.password2.errors}}</b>
-					 </blockquote>
+					<div align="center" class="alert alert-danger">
+							<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>{{ form.username.errors }}{{ form.password1.errors }}{{form.password2.errors}}</strong>
+
+					</div>
 					{%endif%}
 					<div class="row justify-content-center align-items-center">
 						<div class="col-lg-8 col-md-12 home-about-left">
@@ -53,7 +56,7 @@ $(document).ready(function(){
 							<form class="form-wrap" action="/accounts/signup" method="post" enctype="multipart/form-data">
 								{%csrf_token%}
 								<h4 class="text-white pb-20">Sign Up</h4>
-									<input type="text" name="username" id="id_username" autocomplete="off"  placeholder="username" maxlength="150"  class="form-control"
+									<input type="text" name="username" id="id_username" autocomplete="off"  placeholder="username" maxlength="150" required  class="form-control"
 									 data-toggle="popover" data-trigger="focus" data-content="{{form.username.help_text}}"/>
 									{{form.email}}
 									{{form.first_name}}

@@ -51,6 +51,7 @@ class Checkout(models.Model):
 
 
 class Cart(models.Model):
+    unique_key = models.CharField(max_length=20 ,null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     checkout = models.ForeignKey(Checkout, on_delete=models.CASCADE, null=True)
@@ -60,5 +61,5 @@ class Cart(models.Model):
     quantity = models.CharField(max_length=20, default=0)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.product)
 

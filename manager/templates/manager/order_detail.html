@@ -84,22 +84,31 @@
 
                                         <div class="">
                                             <ul class="unordered-list">
-                                        <li><h4><b>Order no.:&nbsp;</b>{{checkout.order_id}}</h4></li>
-                                        <li><h4><b>Payment Mode:&nbsp;</b>{{checkout.payment}}</h4></li>
-                                        <li><h4><b>Total:&nbsp;<i class="fa fa-inr" aria-hidden="true"></i>&nbsp;</b>{{checkout.total_price}}</h4></li>
+                                        <li><b>Order no.:&nbsp;</b>{{checkout.order_id}}</li>
+                                        <li><b>Payment Mode:&nbsp;</b>{{checkout.payment}}</li>
+                                        <li><b>Total:&nbsp;<i class="fa fa-inr" aria-hidden="true"></i>&nbsp;</b>{{checkout.total_price}}</li>
                                             </ul>
                                         </div><hr>
 
                                      <h3 class="mb-20">Shipping Address Details</h3>
                                 <div class="">
                                     <ul class="unordered-list">
-                                        <li><b>Name:&nbsp;</b>{{checkout.user.first_name}}&nbsp;{{checkout.user.last_name}}</li>
-                                        <li><b>Contact:&nbsp;</b>{{checkout.user.profile.phone}}</li>
-                                        <li><b>Address:&nbsp;</b>{{checkout.user.profile.address}}</li>
-                                        <li><b>Area:&nbsp;</b>{{checkout.user.profile.area}}</li>
-                                        <li><b>Zipcode:&nbsp;</b>{{checkout.user.profile.zipcode}}</li>
+                                        {%if checkout.user.profile.tc%}
+                                            <li><b>Name:&nbsp;</b>{{checkout.user.first_name}}&nbsp;{{checkout.user.last_name}}</li>
+                                            <li><b>Contact:&nbsp;</b>{{checkout.user.profile.phone}}</li>
+                                            <li><b>Address:&nbsp;</b>{{checkout.user.profile.address}}</li>
+                                            <li><b>Area:&nbsp;</b>{{checkout.user.profile.area}}</li>
+                                            <li><b>Zip code:&nbsp;</b>{{checkout.user.profile.zipcode}}</li>
+                                        {%else%}
+                                            <li><b>Name:&nbsp;</b>{{guest.name}}</li>
+                                            <li><b>Contact:&nbsp;</b>{{guest.phone}}</li>
+                                            <li><b>Address:&nbsp;</b>{{guest.address}}</li>
+                                            <li><b>Area:&nbsp;</b>{{guest.area}}</li>
+                                            <li><b>Zip code:&nbsp;</b>{{guest.zipcode}}</li>
+                                        {%endif%}
                                     </ul>
                                 </div>
+
                             </blockquote>
                         </div>
                     </div>
